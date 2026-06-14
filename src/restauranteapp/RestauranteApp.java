@@ -12,7 +12,7 @@ public class RestauranteApp {
         // 2. Creamos el controlador encargado de escuchar los eventos y le pasamos la vista
         LoginControlador controlador = new LoginControlador(vistaLogin);
         
-        // 3. Centramos la ventana en la pantalla y la hacemos visible como buena práctica de UX
+        // 3. Centramos la ventana en la pantalla
         vistaLogin.setLocationRelativeTo(null);
         vistaLogin.setVisible(true);
     }

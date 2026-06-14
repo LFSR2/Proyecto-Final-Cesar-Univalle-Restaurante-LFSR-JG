@@ -35,7 +35,8 @@ public class MeseroControlador implements ActionListener {
             String telefono = vista.getTelefono();
             String direccion = vista.getDireccion();
             String email = vista.getEmail();
-            // Por defecto, asignamos una contraseña inicial (1234)
+            
+            // Asignamos una contraseña inicial (1234) esto para que el SQL no tire errores
             String contrasenaPredeterminada = "1234"; 
 
             if (cedula.isEmpty() || nombre.isEmpty() || email.isEmpty()) {
@@ -43,11 +44,11 @@ public class MeseroControlador implements ActionListener {
                 return;
             }
 
-            // Instanciamos tu clase correcta ConexionBD
+            // clase para realizar la conexion de mi SQL (ConexionBD)
             ConexionBD miConexion = new ConexionBD(); 
             Connection conexion = miConexion.conectar();
             
-            // Agregamos el campo contraceña a la inserción SQL
+            
             String sql = "INSERT INTO meseros (cedula, nombre, telefono, direccion, email, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
             
             PreparedStatement ps = conexion.prepareStatement(sql);

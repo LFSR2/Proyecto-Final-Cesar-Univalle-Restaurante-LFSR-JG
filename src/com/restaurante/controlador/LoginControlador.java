@@ -31,21 +31,21 @@ public class LoginControlador implements ActionListener {
         String usuario = vista.getUsuario();
         String password = vista.getPassword();
 
-        // Validación visual preliminar (Heurística de prevención de errores)
+        // Validacion visual de prevención de errores
         if (usuario.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Por favor, complete todos los campos.");
             return;
         }
 
-        // Instanciamos tu clase de conexión y abrimos el flujo JDBC
+        // Clase de conexión y abrimos el flujo JDBC
         ConexionBD miConexion = new ConexionBD(); 
         Connection conexion = miConexion.conectar();
         
-        // Sentencia SQL parametrizada para buscar en la tabla meseros
+        // SQL para buscar en la tabla meseros
         String sql = "SELECT * FROM meseros WHERE cedula = ? AND contrasena = ?";
 
         try {
-            // PreparedStatement para evitar inyección SQL
+            // PreparedStatement para evitar expulcion SQL
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, usuario);
             ps.setString(2, password);
@@ -59,7 +59,7 @@ public class LoginControlador implements ActionListener {
                 
                 vista.dispose(); // Cerramos la ventana de Login
                 
-                // Abrimos la pantalla de registro de meseros
+                // Se abre la pantalla de registro de meseros
                 RegistrarMeseroVista vistaMesero = new RegistrarMeseroVista();
                 MeseroControlador controladorMesero = new MeseroControlador(vistaMesero); 
                 vistaMesero.setVisible(true);
@@ -67,7 +67,7 @@ public class LoginControlador implements ActionListener {
                 JOptionPane.showMessageDialog(vista, "Usuario o contraseña incorrectos.");
             }
             
-            // Cierre obligatorio de conexiones fisicas
+            
             conexion.close();
             
         } catch (SQLException ex) {
